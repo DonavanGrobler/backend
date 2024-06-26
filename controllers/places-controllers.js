@@ -25,11 +25,8 @@ const getPlaceById = (req, res, next) => {
     throw new HttpError("Could not find a place for the provided id.", 404);
   }
 
-  res.json({ place }); // => { place } => { place: place }
+  res.json({ place });
 };
-
-// function getPlaceById() { ... }
-// const getPlaceById = function() { ... }
 
 const getPlaceByUserId = (req, res, next) => {
   const userId = req.params.uid;
@@ -47,5 +44,21 @@ const getPlaceByUserId = (req, res, next) => {
   res.json({ place });
 };
 
+const createPlace = (req, res, next) => {
+  const { title, description, coordinates, address, creator } = req.body;
+
+  const createdPlace = {
+    title,
+    description,
+    location: coordinates,
+    address,
+    creator,
+  };
+
+  DUMMY_PLACES.push(createdPlace);
+  res.status(201).json({ place: createdPlace });
+};
+
 exports.getPlaceById = getPlaceById;
 exports.getPlaceByUserId = getPlaceByUserId;
+exports.createPlace = createPlace;
