@@ -1,60 +1,11 @@
 const express = require("express");
 
+const placesControllers = require("../controllers/places-controllers");
+
 const router = express.Router();
 
-const HttpError = require("../modules/http-error");
+router.get("/:pid", placesControllers.getPlaceById);
 
-const DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    location: {
-      lat: 40.7484474,
-      lng: -73.9871516,
-    },
-    address: "20 W 34th St, New York, NY 10001",
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Empire State Building 2",
-    description: "One of the most famous sky scrapers in the world!",
-    location: {
-      lat: 40.7484474,
-      lng: -73.9871516,
-    },
-    address: "20 W 34th St, New York, NY 10001",
-    creator: "u2",
-  },
-];
-
-router.get("/:pid", (req, res, next) => {
-  const placeId = req.params.pid;
-  const place = DUMMY_PLACES.find((p) => {
-    return p.id === placeId;
-  });
-
-  if (!place) {
-    throw new HttpError("Could not find the place for this placeId", 404);
-  }
-
-  res.json({ place });
-});
-
-router.get("/user/:uid", (req, res, next) => {
-  const userId = req.params.uid;
-  const place = DUMMY_PLACES.find((p) => {
-    return p.creator === userId;
-  });
-
-  if (!place) {
-    return next(
-      new HttpError("Could not find the place for this placeId", 404)
-    );
-  }
-
-  res.json({ place });
-});
+router.get("/user/:uid", placesControllers.getPlaceByUserId);
 
 module.exports = router;
