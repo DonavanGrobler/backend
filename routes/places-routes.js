@@ -23,7 +23,7 @@ const DUMMY_PLACES = [
       lng: -73.9871516,
     },
     address: "20 W 34th St, New York, NY 10001",
-    creator: "u1",
+    creator: "u2",
   },
 ];
 
@@ -32,6 +32,28 @@ router.get("/:pid", (req, res, next) => {
   const place = DUMMY_PLACES.find((p) => {
     return p.id === placeId;
   });
+
+  if (!place) {
+    const error = new Error("Could not find the place for this placeId");
+    error.code = 404;
+    throw error;
+  }
+
+  res.json({ place });
+});
+
+router.get("/user/:uid", (req, res, next) => {
+  const userId = req.params.uid;
+  const place = DUMMY_PLACES.find((p) => {
+    return p.creator === userId;
+  });
+
+  if (!place) {
+    const error = new Error("Could not find the place for this userId");
+    error.code = 404;
+    return next();
+  }
+
   res.json({ place });
 });
 
