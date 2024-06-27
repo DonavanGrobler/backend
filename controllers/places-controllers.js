@@ -55,7 +55,7 @@ const createPlace = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors);
-    next(HttpError("Invalid inputs passed, please check data", 422));
+    return next(HttpError("Invalid inputs passed, please check data", 422));
   }
 
   const { title, description, address, creator } = req.body;
