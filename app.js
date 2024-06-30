@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -26,4 +27,11 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "Unknown error occurred!" });
 });
 
-app.listen(5001);
+mongoose
+  .connect(
+    "mongodb+srv://donavangrobler:42069@mern-stack-project.ad4vguk.mongodb.net/mern-stack-course-collection?retryWrites=true&w=majority&appName=MERN-Stack-Project"
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch();

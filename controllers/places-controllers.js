@@ -6,6 +6,8 @@ const { validationResult } = require("express-validator");
 
 const getCoordsForAddress = require("../util/location");
 
+const Place = require("../models/place");
+
 let DUMMY_PLACES = [
   {
     id: "p1",
@@ -21,7 +23,7 @@ let DUMMY_PLACES = [
 ];
 
 const getPlaceById = (req, res, next) => {
-  const placeId = req.params.pid; // { pid: 'p1' }
+  const placeId = req.params.pid;
 
   const place = DUMMY_PLACES.find((p) => {
     return p.id === placeId;
@@ -68,14 +70,22 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  const createdPlace = {
-    id: uuid.v4(),
+  const createdPlace = new Place({
     title,
     description,
-    location: coordinates,
     address,
+    location: coordinates,
+    image:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.adultswim.com%2Fvideos%2Frick-and-morty&psig=AOvVaw1VeVOqnlVLi8bGdu7nawNv&ust=1719844441322000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLiM5fnFg4cDFQAAAAAdAAAAABAE",
     creator,
-  };
+  });
+
+  try {
+    await createdPlace.save();
+  } catch (err) {
+    const error = new HttpError("Please try again", 500);
+    return next(error);
+  }
 
   DUMMY_PLACES.push(createdPlace);
   res.status(201).json({ place: createdPlace });
