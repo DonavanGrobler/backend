@@ -27,7 +27,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
 
@@ -49,7 +49,7 @@ const signup = async (req, res, next) => {
     image:
       "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.adultswim.com%2Fvideos%2Frick-and-morty&psig=AOvVaw1VeVOqnlVLi8bGdu7nawNv&ust=1719844441322000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLiM5fnFg4cDFQAAAAAdAAAAABAE",
     password,
-    places,
+    places: [],
   });
 
   try {
