@@ -72,7 +72,6 @@ const createPlace = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors);
     return next(new HttpError("Invalid inputs passed, please check data", 422));
   }
 
@@ -110,7 +109,6 @@ const updatePlace = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors);
     throw new HttpError("Invalid inputs passed, please check data", 422);
   }
 
@@ -150,7 +148,6 @@ const deletePlace = async (req, res, next) => {
       return next(error);
     }
   } catch (err) {
-    console.error("Error finding place:", err);
     const error = new HttpError(
       "Something went wrong, could not delete place.",
       500
