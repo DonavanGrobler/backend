@@ -10,6 +10,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  next();
+});
+
 app.use("/api/places", placesRoutes);
 
 app.use("/api/users", usersRoutes);
@@ -29,7 +39,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://donavangrobler:42069@mern-stack-project.ad4vguk.mongodb.net/mern-stack-course-collection?retryWrites=true&w=majority&appName=MERN-Stack-Project"
+    "mongodb+srv://donavangrobler:42069@mern-stack-project.ad4vguk.mongodb.net/main-mern-stack-course-collection?retryWrites=true&w=majority&appName=MERN-Stack-Project"
   )
   .then(() => {
     app.listen(5000);
