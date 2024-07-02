@@ -50,7 +50,7 @@ const signup = async (req, res, next) => {
     name,
     email,
     image:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.adultswim.com%2Fvideos%2Frick-and-morty&psig=AOvVaw1VeVOqnlVLi8bGdu7nawNv&ust=1719844441322000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLiM5fnFg4cDFQAAAAAdAAAAABAE",
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     password,
     places: [],
   });
@@ -82,7 +82,10 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ message: "Logged in!" });
+  res.json({
+    message: "Logged in!",
+    user: existingUser.toObject({ getters: true }),
+  });
 };
 
 exports.getUsers = getUsers;
