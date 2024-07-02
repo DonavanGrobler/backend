@@ -3,7 +3,7 @@ const uuid = require("uuid");
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
-  "image/jpef": "jpeg",
+  "image/jpeg": "jpeg",
   "image/jpg": "jpg",
 };
 
