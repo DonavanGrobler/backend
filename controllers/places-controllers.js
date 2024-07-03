@@ -179,7 +179,7 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  if (place.creator !== req.userData.userId) {
+  if (place.creator.id !== req.userData.userId) {
     const error = new HttpError(
       "You are not allowed to access this delete request",
       401
