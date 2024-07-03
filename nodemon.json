@@ -1,0 +1,9 @@
+{
+  "env": {
+    "DB_USER": "donavangrobler",
+    "DB_PASSWORD": "42069",
+    "DB_NAME": "main-mern-stack-course-collection",
+    "GOOGLE_API_KEY": "AIzaSyCL238sYmLQ9CjrsppAyaKgnrZkMdQNZPw",
+    "JWT_KEY": "supersecret_dont_share"
+  }
+}
