@@ -50,6 +50,6 @@ mongoose
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@mern-stack-project.ad4vguk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=MERN-Stack-Project`
   )
   .then(() => {
-    app.listen(process.env.PORT || 5000);
+    app.listen(5000);
   })
   .catch();
